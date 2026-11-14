@@ -138,7 +138,10 @@ export async function verifyWebhook(rawBody: string, signatureHeader: string | n
   if (Math.abs(Date.now() / 1000 - t) > toleranceSeconds) {
     throw new HospifyError("invalid_signature", "The webhook is too old. Check your server's clock.", 400);
   }
-  const subtle = globalThis.crypto?.subtle;
+  // Node 18 has Web Crypto in node:crypto but not as a global (that came in Node 19).
+  const subtle: SubtleCrypto | undefined =
+    globalThis.crypto?.subtle ??
+    (await import("node:crypto" as string).then((m: any) => m.webcrypto?.subtle).catch(() => undefined));
   if (!subtle) throw new HospifyError("no_crypto", "This runtime has no Web Crypto. Use Node 18 or later.", 0);
   const key = await subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const mac = hex(await subtle.sign("HMAC", key, new TextEncoder().encode(`${t}.${rawBody}`)));

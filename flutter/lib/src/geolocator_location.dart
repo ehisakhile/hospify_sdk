@@ -35,7 +35,7 @@ class GeolocatorLocation extends LocationProvider {
       final p = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(accuracy: LocationAccuracy.high, timeLimit: Duration(seconds: 8)),
       );
-      return _fix(p);
+      return await _fix(p);
     } catch (_) {
       return null;
     }
