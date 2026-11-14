@@ -1,3 +1,7 @@
+## 1.0.2
+
+- The example uses only the basic widgets library, so it analyses cleanly on Flutter 3.47, where package:flutter/material.dart is deprecated.
+
 ## 1.0.1
 
 - geolocator 14.

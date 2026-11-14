@@ -7,7 +7,7 @@ import 'errors.dart';
 import 'geolocator_location.dart';
 import 'models.dart';
 
-const _version = '1.0.1';
+const _version = '1.0.2';
 
 /// Hospify SOS inside your app.
 class Hospify {
