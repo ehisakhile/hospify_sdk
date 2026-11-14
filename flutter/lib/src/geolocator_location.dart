@@ -7,7 +7,10 @@ import 'models.dart';
 /// For location while the app is in the background during an SOS, add the background location
 /// settings geolocator documents (Android foreground service, iOS "location" background mode).
 class GeolocatorLocation extends LocationProvider {
+  /// Reads the battery percentage, if you want it sent with each fix (for example from battery_plus).
   final Future<int?> Function()? battery;
+
+  /// Location from the device's GPS.
   GeolocatorLocation({this.battery});
 
   bool? _allowed;

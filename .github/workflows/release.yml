@@ -76,7 +76,15 @@ jobs:
       - name: Tag matches package.json
         run: test "ts-v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
       - run: npm install --no-audit --no-fund && npm run build
-      - run: npm publish --access public
+      - name: Publish to npm
+        run: |
+          # npm's errors become annotations, so they show on the run page without opening the log
+          npm whoami 2>&1 | sed 's/^/::notice title=npm whoami::/' || true
+          set +e
+          npm publish --access public > npm.out 2>&1; code=$?
+          cat npm.out
+          if [ $code -ne 0 ]; then grep -E 'npm (error|ERR)' npm.out | head -8 | sed 's/^/::error title=npm publish::/'; fi
+          exit $code
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -98,8 +106,18 @@ jobs:
         working-directory: react-native
       - run: npm install --no-audit --no-fund && npm run build
         working-directory: typescript
-      - run: npm install --no-audit --no-fund && npm run build && npm publish --access public
+      - run: npm install --no-audit --no-fund && npm run build
         working-directory: react-native
+      - name: Publish to npm
+        working-directory: react-native
+        run: |
+          # npm's errors become annotations, so they show on the run page without opening the log
+          npm whoami 2>&1 | sed 's/^/::notice title=npm whoami::/' || true
+          set +e
+          npm publish --access public > npm.out 2>&1; code=$?
+          cat npm.out
+          if [ $code -ne 0 ]; then grep -E 'npm (error|ERR)' npm.out | head -8 | sed 's/^/::error title=npm publish::/'; fi
+          exit $code
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

@@ -7,7 +7,7 @@ import 'errors.dart';
 import 'geolocator_location.dart';
 import 'models.dart';
 
-const _version = '1.0.0';
+const _version = '1.0.1';
 
 /// Hospify SOS inside your app.
 class Hospify {
@@ -25,6 +25,7 @@ class Hospify {
 
   /// How often to check who's responding while an SOS is open.
   final Duration pollEvery;
+  /// The API address. Leave the default.
   final String baseUrl;
   final http.Client _http;
 
@@ -141,6 +142,7 @@ class Sos {
 
   /// The SOS as last seen, or null.
   SosState? get current => _state;
+  /// True while the SOS is open or acknowledged.
   bool get isOpen => _state?.isOpen ?? false;
 
   /// Every change: acknowledged, escalated, closed.
@@ -184,6 +186,7 @@ class Sos {
     return _state;
   }
 
+  /// Stops sending location and checking status, without closing the SOS.
   void stopTracking() {
     _locationTimer?.cancel();
     _pollTimer?.cancel();

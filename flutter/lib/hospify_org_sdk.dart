@@ -8,7 +8,7 @@
 /// await hospify.sos.start(note: 'Need help');
 /// ```
 ///
-/// Docs: https://developers.hospify.africa/docs/flutter
+/// Docs: https://developers.hospify.africa/docs/sdks/flutter
 library hospify_org_sdk;
 
 export 'src/client.dart';

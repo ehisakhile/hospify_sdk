@@ -1,13 +1,21 @@
 /// A position from the device.
 class LocationFix {
+  /// Latitude in degrees.
   final double latitude;
+
+  /// Longitude in degrees.
   final double longitude;
+
+  /// How accurate the fix is, in metres, if known.
   final double? accuracyM;
 
   /// Battery percentage, 0 to 100, if known.
   final int? battery;
+
+  /// A position to send to Hospify.
   const LocationFix({required this.latitude, required this.longitude, this.accuracyM, this.battery});
 
+  /// The body the API expects.
   Map<String, dynamic> toJson() => {
         'latitude': latitude,
         'longitude': longitude,
@@ -27,6 +35,7 @@ abstract class LocationProvider {
 
 /// What the agent's app sees about their own SOS.
 class SosState {
+  /// The incident id, for example `inc_...`.
   final String id;
 
   /// open, acknowledged, resolved or false_alarm.
@@ -34,17 +43,26 @@ class SosState {
 
   /// 0: the agent's supervisors; 1: every admin in the organisation.
   final int escalationStep;
+
+  /// False for test keys: nobody was alerted.
   final bool livemode;
+
+  /// When a supervisor took it.
   final DateTime? acknowledgedAt;
 
   /// The supervisor who took it, by name.
   final String? responder;
+
+  /// When it was closed.
   final DateTime? closedAt;
 
   /// resolved or false_alarm, once closed.
   final String? outcome;
+
+  /// When the agent raised it.
   final DateTime? createdAt;
 
+  /// An SOS as the API describes it.
   const SosState({
     required this.id,
     required this.status,
@@ -57,10 +75,12 @@ class SosState {
     this.createdAt,
   });
 
+  /// True until the SOS is resolved or cancelled.
   bool get isOpen => status == 'open' || status == 'acknowledged';
 
   static DateTime? _t(Object? v) => v is String ? DateTime.tryParse(v)?.toLocal() : null;
 
+  /// Reads the API's JSON.
   factory SosState.fromJson(Map<String, dynamic> j) => SosState(
         id: j['id'] as String,
         status: j['status'] as String,
@@ -89,14 +109,28 @@ class SosState {
 
 /// The signed-in agent.
 class Agent {
+  /// Your id for the person.
   final String externalId;
+
+  /// The name supervisors see.
   final String displayName;
+
+  /// The agent's team, if you set one.
   final String? team;
+
+  /// The agent's site, if you set one.
   final String? site;
+
+  /// False once you deactivate the agent.
   final bool active;
+
+  /// False for agents made with test keys.
   final bool livemode;
+
+  /// An agent as the API describes them.
   const Agent({required this.externalId, required this.displayName, this.team, this.site, this.active = true, this.livemode = false});
 
+  /// Reads the API's JSON.
   factory Agent.fromJson(Map<String, dynamic> j) => Agent(
         externalId: j['external_id'] as String,
         displayName: j['display_name'] as String,

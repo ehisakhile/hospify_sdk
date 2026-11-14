@@ -1,6 +1,6 @@
 name: hospify_org_sdk
 description: Hospify for Organisations SOS inside your own Flutter app. Live location while an agent is in danger, and an escalation chain that reaches the right people.
-version: 1.0.0
+version: 1.0.1
 homepage: https://developers.hospify.africa
 repository: https://github.com/ehisakhile/hospify_sdk/tree/main/flutter
 issue_tracker: https://github.com/ehisakhile/hospify_sdk/issues
@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.2.0
-  geolocator: ^13.0.0
+  geolocator: ^14.1.2
 
 dev_dependencies:
   flutter_test:
