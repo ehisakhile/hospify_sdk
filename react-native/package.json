@@ -1,0 +1,25 @@
+{
+  "name": "@hospify/org-sdk-react-native",
+  "version": "1.0.0",
+  "description": "Hospify for Organisations SOS in React Native apps: location adapters for Expo and community geolocation, and a useHospifySos hook.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/"
+  },
+  "peerDependencies": {
+    "@hospify/org-sdk": "^1.0.0",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@hospify/org-sdk": "file:../typescript",
+    "@types/react": "18.3.12",
+    "react": "18.3.1",
+    "typescript": "5.6.3"
+  },
+  "homepage": "https://developers.hospify.africa"
+}
