@@ -32,6 +32,7 @@ assert.equal(open.data[0].agent.external_id, "AGT-20931");
 await server.incidents.acknowledge(sos.id, { by: "Control room" });
 await new Promise((r) => setTimeout(r, 700));
 assert.ok(seen.includes("acknowledged"), `the app heard the acknowledgement (saw ${seen})`);
+assert.equal(app.sos.current.responder, "Control room", "the agent sees who is responding");
 
 const closed = await app.sos.safe("Home now");
 assert.equal(closed.outcome, "resolved");

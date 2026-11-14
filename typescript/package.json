@@ -7,12 +7,23 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-    "./server": { "types": "./dist/server.d.ts", "default": "./dist/server.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --test test/"
@@ -21,5 +32,20 @@
     "typescript": "5.6.3"
   },
   "homepage": "https://developers.hospify.africa",
-  "keywords": ["hospify", "sos", "safety", "nigeria", "field agents", "lone worker"]
+  "keywords": [
+    "hospify",
+    "sos",
+    "safety",
+    "nigeria",
+    "field agents",
+    "lone worker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehisakhile/hospify_sdk.git",
+    "directory": "typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/ehisakhile/hospify_sdk/issues"
+  }
 }
