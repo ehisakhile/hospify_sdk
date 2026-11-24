@@ -6,3 +6,6 @@ pubspec.lock
 .flutter-plugins
 .flutter-plugins-dependencies
 *.log
+
+# macOS Finder files
+.DS_Store
